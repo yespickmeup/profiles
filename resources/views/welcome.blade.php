@@ -26,7 +26,7 @@
     </head>
     <body>
 
-        <div style="background-image: url('../src/img/system/countdown/72104.jpg')" class="main"> 
+        <div style="background-image: url('../src/img/system/country-scenes-wallpaper-6.jpg')" class="main"> 
             <div class="overlay"></div>
             <div class="container">
                 <br><br><br><br>
