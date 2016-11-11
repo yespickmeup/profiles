@@ -1,2 +1,11 @@
 
-rock n roll
+git init
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git pull origin master
+
+
+git reset --mixed origin/master
+git add .
+git commit -m "This is a new commit for what I originally planned to be amended"
+git push origin master
