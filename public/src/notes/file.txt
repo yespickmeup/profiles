@@ -27,3 +27,5 @@ https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-php-7-on-ubun
 sudo apt-get install php7.0-mbstring
 sudo apt-get install php7.0-xml
 
+ssh root@128.199.80.53
+
