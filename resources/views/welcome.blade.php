@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Countdown landing page Bootstrap template</title>
+        <title>Welcome | Profiles</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="all,follow">
@@ -19,19 +19,19 @@
         <!-- Custom stylesheet - for your changes-->
         <link rel="stylesheet" href="../css/countdown/custom.css">
         <!-- Favicon-->
-        <link rel="shortcut icon" href="favicon.png">
+         <link rel="shortcut icon" type="image/png" href="../src/img/system/city_planning.ico" />
         <!-- Tweaks for older IEs--><!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     </head>
     <body>
 
-        <div style="background-image: url('../src/img/system/countdown/beach.jpg')" class="main"> 
+        <div style="background-image: url('../src/img/system/countdown/72104.jpg')" class="main"> 
             <div class="overlay"></div>
             <div class="container">
                 <br><br><br><br>
               
-                <p class="social"> <img src="../src/img/system/logo.png" ><br>
+                <p class="social"> <img src="../src/img/system/city_planning.png" style="width: 50px;height: 50px;color: white;" ><br>
                     <label style="font-size: 30px;color: whitesmoke;">Profiles</label>
                 </p>
                 
@@ -82,7 +82,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>&copy;2016 Synapse Software Technologies</p>
+                            <p>&copy;&nbsp;&nbsp;<img src="../src/img/system/logo.png" style="width: 15px;height: 15px;color: white;" >&nbsp;2016 Synapse Software Technologies</p>
                         </div>
                         <div class="col-md-6">
                             <p class="credit">Made with <i class="fa fa-heart-o" aria-hidden="false" style="color: red;"></i> by Synapse Software Technologies</p>
