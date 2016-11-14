@@ -29,3 +29,8 @@ sudo apt-get install php7.0-xml
 
 ssh root@128.199.80.53
 
+
+#install laratrust
+http://laratrust.readthedocs.io/en/3.0/installation.html
+php artisan make:auth
+php artisan migrate
