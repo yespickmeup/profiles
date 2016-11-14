@@ -34,3 +34,6 @@ ssh root@128.199.80.53
 http://laratrust.readthedocs.io/en/3.0/installation.html
 php artisan make:auth
 php artisan migrate
+
+#phpmyadmin
+sudo ln -s /usr/share/phpmyadmin /var/www/laravel/public
