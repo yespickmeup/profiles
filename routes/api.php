@@ -22,3 +22,8 @@ Route::get('/users', [
     'uses' => 'UserController@getUsers'
 ]);
 
+
+Route::post('/user.add', [
+    'as' => 'user.add',
+    'uses' => 'UserController@postRegister'
+]);
