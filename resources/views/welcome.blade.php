@@ -37,8 +37,6 @@
                 
                 <div class="row">
                     <div class="col-md-12">
-                       
-                        
                         <h2 class="sub">We are still tweaking few details, stay tuned!</h2>
                     </div>
                 </div>

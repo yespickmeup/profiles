@@ -37,3 +37,4 @@ php artisan migrate
 
 #phpmyadmin
 sudo ln -s /usr/share/phpmyadmin /var/www/laravel/public
+GRANT ALL ON dp_profiles.* TO root@'128.199.80.53' IDENTIFIED BY 'synapse246';
