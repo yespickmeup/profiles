@@ -143,7 +143,7 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-sm-6 col-md-12" ng-controller="mainCtrl">
-                            <div class="box box-info collapsed-box"  style="border-radius: 0px;border-top-color: white;">
+                            <div class="box box-info "  style="border-radius: 0px;border-top-color: white;">
                                 @include('reports.main-overall')
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-12" ng-controller="skillsController">
-                            <div class="box box-info "  style="border-radius: 0px;border-top-color: white;">
+                            <div class="box box-info collapsed-box"  style="border-radius: 0px;border-top-color: white;">
                                 @include('reports.main-skills')
                             </div>
                         </div>
