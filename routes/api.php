@@ -26,3 +26,8 @@ Route::post('/user.add', [
     'as' => 'user.add',
     'uses' => 'UserController@postRegister'
 ]);
+
+Route::post('/upload.new', [
+    'as' => 'upload.new',
+    'uses' => 'HouseholdController@postNewUpload'
+]);
