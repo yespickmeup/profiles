@@ -12,6 +12,13 @@ use App\HouseholdMemberCompetenceCertificate;
 use App\HouseholdMemberEducationalBackground;
 use App\HouseholdMemberEmployementStatus;
 use App\HouseholdMemberHealthStatuses;
+use App\HouseholdMemberLicense;
+use App\HouseholdMemberMedication;
+use App\HouseholdMemberPreferedWork;
+use App\HouseholdMemberSkill;
+use App\HouseholdMemberVocationalExperience;
+use App\HouseholdMemberWorkExperience;
+use App\House;
 
 class HouseholdController extends Controller {
 
@@ -38,7 +45,23 @@ class HouseholdController extends Controller {
         $household_member_employment_status_array = [];
         $household_member_health_statuses = json_decode($decode["household_member_health_statuses"], true);
         $household_member_health_statuses_array = [];
+        $household_member_licenses = json_decode($decode["household_member_licenses"], true);
+        $household_member_licenses_array = [];
+        $household_member_medications = json_decode($decode["household_member_medications"], true);
+        $household_member_medications_array = [];
+        $household_member_prefered_works = json_decode($decode["household_member_prefered_works"], true);
+        $household_member_prefered_works_array = [];
+        $household_member_skills = json_decode($decode["household_member_skills"], true);
+        $household_member_skills_array = [];
+        $household_member_vocational_experiences = json_decode($decode["household_member_vocational_experiences"], true);
+        $household_member_vocational_experiences_array = [];
+        $household_member_work_experiences = json_decode($decode["household_member_work_experiences"], true);
+        $household_member_work_experiences_array = [];
 
+        $houses = json_decode($decode["houses"], true);
+        $houses_array = [];
+
+        
         foreach ($households as $household) {
             array_push($households_array, $household['id']);
             $new_household = new Household();
@@ -56,7 +79,7 @@ class HouseholdController extends Controller {
             $new_household->barangay_id = $household['barangay_id'];
             $new_household->purok = $household['purok'];
             $new_household->purok_id = $household['purok_id'];
-            $new_household->status = 2;
+            $new_household->status = 0;
             $new_household->house_no = $household['house_no'];
             $new_household->household_no = $household['household_no'];
             $new_household->occupancy_types = $household['occupancy_types'];
@@ -80,7 +103,7 @@ class HouseholdController extends Controller {
             $new_household->environmental_contamination_rating = $household['environmental_contamination_rating'];
             $new_household->health_disparities_rating = $household['health_disparities_rating'];
             $new_household->no_of_household_members = $household['no_of_household_members'];
-//            $new_household->save();
+            $new_household->save();
         }
         foreach ($household_assets as $household_asset) {
             array_push($household_assets_array, $household_asset['id']);
@@ -99,12 +122,12 @@ class HouseholdController extends Controller {
             $new_household_asset->barangay_id = $household_asset['barangay_id'];
             $new_household_asset->purok = $household_asset['purok'];
             $new_household_asset->purok_id = $household_asset['purok_id'];
-            $new_household_asset->status = 2;
+            $new_household_asset->status = 0;
             $new_household_asset->house_no = $household_asset['house_no'];
             $new_household_asset->household_no = $household_asset['household_no'];
             $new_household_asset->qty = $household_asset['qty'];
             $new_household_asset->assets = $household_asset['assets'];
-//            $new_household_asset->save();
+            $new_household_asset->save();
         }
         foreach ($household_consumptions as $household_consumption) {
             array_push($household_consumptions_array, $household_consumption['id']);
@@ -123,13 +146,13 @@ class HouseholdController extends Controller {
             $new_HouseholdConsumption->barangay_id = $household_consumption['barangay_id'];
             $new_HouseholdConsumption->purok = $household_consumption['purok'];
             $new_HouseholdConsumption->purok_id = $household_consumption['purok_id'];
-            $new_HouseholdConsumption->status = 2;
+            $new_HouseholdConsumption->status = 0;
             $new_HouseholdConsumption->house_no = $household_consumption['house_no'];
             $new_HouseholdConsumption->household_no = $household_consumption['household_no'];
             $new_HouseholdConsumption->consumption_date = $household_consumption['consumption_date'];
             $new_HouseholdConsumption->items = $household_consumption['items'];
             $new_HouseholdConsumption->amount = $household_consumption['amount'];
-//            $new_HouseholdConsumption->save();
+            $new_HouseholdConsumption->save();
         }
         foreach ($household_expenditures as $household_expenditure) {
             array_push($household_expenditures_array, $household_expenditure['id']);
@@ -148,7 +171,7 @@ class HouseholdController extends Controller {
             $new_household_expenditures->barangay_id = $household_expenditure['barangay_id'];
             $new_household_expenditures->purok = $household_expenditure['purok'];
             $new_household_expenditures->purok_id = $household_expenditure['purok_id'];
-            $new_household_expenditures->status = 2;
+            $new_household_expenditures->status = 0;
             $new_household_expenditures->house_no = $household_expenditure['house_no'];
             $new_household_expenditures->household_no = $household_expenditure['household_no'];
             $new_household_expenditures->expenditure_date = $household_expenditure['expenditure_date'];
@@ -167,7 +190,7 @@ class HouseholdController extends Controller {
             $new_household_expenditures->water_bill = $household_expenditure['water_bill'];
             $new_household_expenditures->cable_services = $household_expenditure['cable_services'];
             $new_household_expenditures->social_obligations = $household_expenditure['social_obligations'];
-//            $new_household_expenditures->save();
+            $new_household_expenditures->save();
         }
         foreach ($household_members as $household_member) {
             array_push($household_members_array, $household_member['id']);
@@ -186,7 +209,7 @@ class HouseholdController extends Controller {
             $new_household_members->barangay_id = $household_member['barangay_id'];
             $new_household_members->purok = $household_member['purok'];
             $new_household_members->purok_id = $household_member['purok_id'];
-            $new_household_members->status = 2;
+            $new_household_members->status = 0;
             $new_household_members->house_no = $household_member['house_no'];
             $new_household_members->household_no = $household_member['household_no'];
             $new_household_members->household_member_no = $household_member['household_member_no'];
@@ -213,7 +236,7 @@ class HouseholdController extends Controller {
             $new_household_members->image = $household_member['image'];
             $new_household_members->transient_no = $household_member['transient_no'];
             $new_household_members->contact_no = $household_member['contact_no'];
-//            $new_household_members->save();
+            $new_household_members->save();
         }
         foreach ($household_member_competence_certificates as $household_member_competence_certificate) {
             array_push($household_member_competence_certificates_array, $household_member_competence_certificate['id']);
@@ -232,7 +255,7 @@ class HouseholdController extends Controller {
             $new_household_member_competence_certificate->barangay_id = $household_member_competence_certificate['barangay_id'];
             $new_household_member_competence_certificate->purok = $household_member_competence_certificate['purok'];
             $new_household_member_competence_certificate->purok_id = $household_member_competence_certificate['purok_id'];
-            $new_household_member_competence_certificate->status = 2;
+            $new_household_member_competence_certificate->status = 0;
             $new_household_member_competence_certificate->house_no = $household_member_competence_certificate['house_no'];
             $new_household_member_competence_certificate->household_no = $household_member_competence_certificate['household_no'];
             $new_household_member_competence_certificate->household_member_no = $household_member_competence_certificate['household_member_no'];
@@ -245,7 +268,7 @@ class HouseholdController extends Controller {
             $new_household_member_competence_certificate->issued_by = $household_member_competence_certificate['issued_by'];
             $new_household_member_competence_certificate->date_issued = $household_member_competence_certificate['date_issued'];
             $new_household_member_competence_certificate->transient_no = $household_member_competence_certificate['transient_no'];
-//            $new_household_member_competence_certificate->save();
+            $new_household_member_competence_certificate->save();
         }
         foreach ($household_member_educational_backgrounds as $household_member_educational_background) {
             array_push($household_member_educational_backgrounds_array, $household_member_educational_background['id']);
@@ -264,7 +287,7 @@ class HouseholdController extends Controller {
             $new_household_member_educational_background->barangay_id = $household_member_educational_background['barangay_id'];
             $new_household_member_educational_background->purok = $household_member_educational_background['purok'];
             $new_household_member_educational_background->purok_id = $household_member_educational_background['purok_id'];
-            $new_household_member_educational_background->status = 2;
+            $new_household_member_educational_background->status = 0;
             $new_household_member_educational_background->house_no = $household_member_educational_background['house_no'];
             $new_household_member_educational_background->household_no = $household_member_educational_background['household_no'];
             $new_household_member_educational_background->household_member_no = $household_member_educational_background['household_member_no'];
@@ -278,7 +301,7 @@ class HouseholdController extends Controller {
             $new_household_member_educational_background->highest_grade = $household_member_educational_background['highest_grade'];
             $new_household_member_educational_background->year_graduated = $household_member_educational_background['year_graduated'];
             $new_household_member_educational_background->transient_no = $household_member_educational_background['transient_no'];
-//            $new_household_member_educational_background->save();
+            $new_household_member_educational_background->save();
         }
         foreach ($household_member_employment_status as $household_member_employment_statu) {
             array_push($household_member_employment_status_array, $household_member_employment_statu['id']);
@@ -297,7 +320,7 @@ class HouseholdController extends Controller {
             $new_household_member_employment_status->barangay_id = $household_member_employment_statu['barangay_id'];
             $new_household_member_employment_status->purok = $household_member_employment_statu['purok'];
             $new_household_member_employment_status->purok_id = $household_member_employment_statu['purok_id'];
-            $new_household_member_employment_status->status = 2;
+            $new_household_member_employment_status->status = 0;
             $new_household_member_employment_status->house_no = $household_member_employment_statu['house_no'];
             $new_household_member_employment_status->household_no = $household_member_employment_statu['household_no'];
             $new_household_member_employment_status->household_member_no = $household_member_employment_statu['household_member_no'];
@@ -321,58 +344,346 @@ class HouseholdController extends Controller {
             $new_household_member_employment_status->ofw_job = $household_member_employment_statu['ofw_job'];
             $new_household_member_employment_status->ofw_reason_for_migration = $household_member_employment_statu['ofw_reason_for_migration'];
             $new_household_member_employment_status->transient_no = $household_member_employment_statu['transient_no'];
-//            $new_household_member_employment_status->save();
+            $new_household_member_employment_status->save();
         }
         foreach ($household_member_health_statuses as $household_member_health_statuse) {
             array_push($household_member_health_statuses_array, $household_member_health_statuse['id']);
-//            $new_household_member_health_statuses = new HouseholdMemberHealthStatuses();
-//            $new_household_member_health_statuses->created_at = $household_member_health_statuse['created_at'];
-//
-//            $new_household_member_health_statuses->updated_at = $household_member_health_statuse['updated_at'];
-//            $new_household_member_health_statuses->created_by = $household_member_health_statuse['created_by'];
-//            $new_household_member_health_statuses->updated_by = $household_member_health_statuse['updated_by'];
-//            $new_household_member_health_statuses->region = $household_member_health_statuse['region'];
-//            $new_household_member_health_statuses->region_id = $household_member_health_statuse['region_id'];
-//
-//            $new_household_member_health_statuses->province = $household_member_health_statuse['province'];
-//            $new_household_member_health_statuses->province_id = $household_member_health_statuse['province_id'];
-//            $new_household_member_health_statuses->city = $household_member_health_statuse['city'];
-//            $new_household_member_health_statuses->city_id = $household_member_health_statuse['city_id'];
-//            $new_household_member_health_statuses->barangay = $household_member_health_statuse['barangay'];
-//
-//            $new_household_member_health_statuses->barangay_id = $household_member_health_statuse['barangay_id'];
-//            $new_household_member_health_statuses->purok = $household_member_health_statuse['purok'];
-//            $new_household_member_health_statuses->purok_id = $household_member_health_statuse['purok_id'];
-//            $new_household_member_health_statuses->status = 2;
-//            $new_household_member_health_statuses->house_no = $household_member_health_statuse['house_no'];
-//
-//            $new_household_member_health_statuses->household_no = $household_member_health_statuse['household_no'];
-//            $new_household_member_health_statuses->household_member_no = $household_member_health_statuse['household_member_no'];
-//            $new_household_member_health_statuses->fname = $household_member_health_statuse['fname'];
-//            $new_household_member_health_statuses->mname = $household_member_health_statuse['mname'];
-//            $new_household_member_health_statuses->lname = $household_member_health_statuse['lname'];
-//
-//            $new_household_member_health_statuses->sname = $household_member_health_statuse['sname'];
-//            $new_household_member_health_statuses->is_seing_a_doctor = $household_member_health_statuse['is_seing_a_doctor'];
-//            $new_household_member_health_statuses->health_status = $household_member_health_statuse['health_status'];
-//            $new_household_member_health_statuses->name_of_doctor = $household_member_health_statuse['name_of_doctor'];
-//            $new_household_member_health_statuses->disabilities = $household_member_health_statuse['disabilities'];
-//
-//            $new_household_member_health_statuses->level_of_disability = $household_member_health_statuse['level_of_disability'];
-//            $new_household_member_health_statuses->cause_of_disability = $household_member_health_statuse['cause_of_disability'];
-//            $new_household_member_health_statuses->transient_no = $household_member_health_statuse['transient_no'];
-//            $new_household_member_health_statuses->save();
+            $new_household_member_health_statuses = new HouseholdMemberHealthStatuses();
+            $new_household_member_health_statuses->created_at = $household_member_health_statuse['created_at'];
+            $new_household_member_health_statuses->updated_at = $household_member_health_statuse['updated_at'];
+            $new_household_member_health_statuses->created_by = $household_member_health_statuse['created_by'];
+            $new_household_member_health_statuses->updated_by = $household_member_health_statuse['updated_by'];
+            $new_household_member_health_statuses->region = $household_member_health_statuse['region'];
+            $new_household_member_health_statuses->region_id = $household_member_health_statuse['region_id'];
+            $new_household_member_health_statuses->province = $household_member_health_statuse['province'];
+            $new_household_member_health_statuses->province_id = $household_member_health_statuse['province_id'];
+            $new_household_member_health_statuses->city = $household_member_health_statuse['city'];
+            $new_household_member_health_statuses->city_id = $household_member_health_statuse['city_id'];
+            $new_household_member_health_statuses->barangay = $household_member_health_statuse['barangay'];
+            $new_household_member_health_statuses->barangay_id = $household_member_health_statuse['barangay_id'];
+            $new_household_member_health_statuses->purok = $household_member_health_statuse['purok'];
+            $new_household_member_health_statuses->purok_id = $household_member_health_statuse['purok_id'];
+            $new_household_member_health_statuses->status = 0;
+            $new_household_member_health_statuses->house_no = $household_member_health_statuse['house_no'];
+            $new_household_member_health_statuses->household_no = $household_member_health_statuse['household_no'];
+            $new_household_member_health_statuses->household_member_no = $household_member_health_statuse['household_member_no'];
+            $new_household_member_health_statuses->fname = $household_member_health_statuse['fname'];
+            $new_household_member_health_statuses->mname = $household_member_health_statuse['mname'];
+            $new_household_member_health_statuses->lname = $household_member_health_statuse['lname'];
+            $new_household_member_health_statuses->sname = $household_member_health_statuse['sname'];
+            $new_household_member_health_statuses->is_seing_a_doctor = $household_member_health_statuse['is_seing_a_doctor'];
+            $new_household_member_health_statuses->health_status = $household_member_health_statuse['health_status'];
+            $new_household_member_health_statuses->name_of_doctor = $household_member_health_statuse['name_of_doctor'];
+            $new_household_member_health_statuses->disabilities = $household_member_health_statuse['disabilities'];
+            $new_household_member_health_statuses->level_of_disability = $household_member_health_statuse['level_of_disability'];
+            $new_household_member_health_statuses->cause_of_disability = $household_member_health_statuse['cause_of_disability'];
+            $new_household_member_health_statuses->transient_no = $household_member_health_statuse['transient_no'];
+            $new_household_member_health_statuses->save();
         }
+        foreach ($household_member_licenses as $household_member_license) {
+            array_push($household_member_licenses_array, $household_member_license['id']);
+            $new_household_member_licenses = new HouseholdMemberLicense();
+            $new_household_member_licenses->created_at = $household_member_license['created_at'];
+            $new_household_member_licenses->updated_at = $household_member_license['updated_at'];
+            $new_household_member_licenses->created_by = $household_member_license['created_by'];
+            $new_household_member_licenses->updated_by = $household_member_license['updated_by'];
+            $new_household_member_licenses->region = $household_member_license['region'];
+            $new_household_member_licenses->region_id = $household_member_license['region_id'];
+            $new_household_member_licenses->province = $household_member_license['province'];
+            $new_household_member_licenses->province_id = $household_member_license['province_id'];
+            $new_household_member_licenses->city = $household_member_license['city'];
+            $new_household_member_licenses->city_id = $household_member_license['city_id'];
+            $new_household_member_licenses->barangay = $household_member_license['barangay'];
+            $new_household_member_licenses->barangay_id = $household_member_license['barangay_id'];
+            $new_household_member_licenses->purok = $household_member_license['purok'];
+            $new_household_member_licenses->purok_id = $household_member_license['purok_id'];
+            $new_household_member_licenses->status = 0;
+            $new_household_member_licenses->house_no = $household_member_license['house_no'];
+            $new_household_member_licenses->household_no = $household_member_license['household_no'];
+            $new_household_member_licenses->household_member_no = $household_member_license['household_member_no'];
+            $new_household_member_licenses->fname = $household_member_license['fname'];
+            $new_household_member_licenses->mname = $household_member_license['mname'];
+            $new_household_member_licenses->lname = $household_member_license['lname'];
+            $new_household_member_licenses->sname = $household_member_license['sname'];
+            $new_household_member_licenses->title = $household_member_license['title'];
+            $new_household_member_licenses->expiry = $household_member_license['expiry'];
+            $new_household_member_licenses->transient_no = $household_member_license['transient_no'];
+            $new_household_member_licenses->save();
+        }
+        foreach ($household_member_medications as $household_member_medication) {
+            array_push($household_member_medications_array, $household_member_medication['id']);
+            $new_household_member_medications = new HouseholdMemberMedication();
+            $new_household_member_medications->created_at = $household_member_medication['created_at'];
+            $new_household_member_medications->updated_at = $household_member_medication['updated_at'];
+            $new_household_member_medications->created_by = $household_member_medication['created_by'];
+            $new_household_member_medications->updated_by = $household_member_medication['updated_by'];
+            $new_household_member_medications->region = $household_member_medication['region'];
+            $new_household_member_medications->region_id = $household_member_medication['region_id'];
+            $new_household_member_medications->province = $household_member_medication['province'];
+            $new_household_member_medications->province_id = $household_member_medication['province_id'];
+            $new_household_member_medications->city = $household_member_medication['city'];
+            $new_household_member_medications->city_id = $household_member_medication['city_id'];
+            $new_household_member_medications->barangay = $household_member_medication['barangay'];
+            $new_household_member_medications->barangay_id = $household_member_medication['barangay_id'];
+            $new_household_member_medications->purok = $household_member_medication['purok'];
+            $new_household_member_medications->purok_id = $household_member_medication['purok_id'];
+            $new_household_member_medications->status = 0;
+            $new_household_member_medications->house_no = $household_member_medication['house_no'];
+            $new_household_member_medications->household_no = $household_member_medication['household_no'];
+            $new_household_member_medications->household_member_no = $household_member_medication['household_member_no'];
+            $new_household_member_medications->fname = $household_member_medication['fname'];
+            $new_household_member_medications->mname = $household_member_medication['mname'];
+            $new_household_member_medications->lname = $household_member_medication['lname'];
+            $new_household_member_medications->sname = $household_member_medication['sname'];
+            $new_household_member_medications->prescription = $household_member_medication['prescription'];
+            $new_household_member_medications->dosage = $household_member_medication['dosage'];
+            $new_household_member_medications->medication_date_started = $household_member_medication['medication_date_started'];
+            $new_household_member_medications->medication_date_ended = $household_member_medication['medication_date_ended'];
+            $new_household_member_medications->transient_no = $household_member_medication['transient_no'];
+            $new_household_member_medications->save();
+        }
+        foreach ($household_member_prefered_works as $household_member_prefered_work) {
+            array_push($household_member_prefered_works_array, $household_member_prefered_work['id']);
+            $new_household_member_prefered_works = new HouseholdMemberPreferedWork();
+            $new_household_member_prefered_works->created_at = $household_member_prefered_work['created_at'];
+            $new_household_member_prefered_works->updated_at = $household_member_prefered_work['updated_at'];
+            $new_household_member_prefered_works->created_by = $household_member_prefered_work['created_by'];
+            $new_household_member_prefered_works->updated_by = $household_member_prefered_work['updated_by'];
+            $new_household_member_prefered_works->region = $household_member_prefered_work['region'];
+            $new_household_member_prefered_works->region_id = $household_member_prefered_work['region_id'];
+            $new_household_member_prefered_works->province = $household_member_prefered_work['province'];
+            $new_household_member_prefered_works->province_id = $household_member_prefered_work['province_id'];
+            $new_household_member_prefered_works->city = $household_member_prefered_work['city'];
+            $new_household_member_prefered_works->city_id = $household_member_prefered_work['city_id'];
+            $new_household_member_prefered_works->barangay = $household_member_prefered_work['barangay'];
+            $new_household_member_prefered_works->barangay_id = $household_member_prefered_work['barangay_id'];
+            $new_household_member_prefered_works->purok = $household_member_prefered_work['purok'];
+            $new_household_member_prefered_works->purok_id = $household_member_prefered_work['purok_id'];
+            $new_household_member_prefered_works->status = 0;
+            $new_household_member_prefered_works->house_no = $household_member_prefered_work['house_no'];
+            $new_household_member_prefered_works->household_no = $household_member_prefered_work['household_no'];
+            $new_household_member_prefered_works->household_member_no = $household_member_prefered_work['household_member_no'];
+            $new_household_member_prefered_works->fname = $household_member_prefered_work['fname'];
+            $new_household_member_prefered_works->mname = $household_member_prefered_work['mname'];
+            $new_household_member_prefered_works->lname = $household_member_prefered_work['lname'];
+            $new_household_member_prefered_works->sname = $household_member_prefered_work['sname'];
+            $new_household_member_prefered_works->work = $household_member_prefered_work['work'];
+            $new_household_member_prefered_works->transient_no = $household_member_prefered_work['transient_no'];
+            $new_household_member_prefered_works->save();
+        }
+        foreach ($household_member_skills as $household_member_skill) {
+            array_push($household_member_skills_array, $household_member_skill['id']);
+            $new_household_member_skills = new HouseholdMemberSkill();
+            $new_household_member_skills->created_at = $household_member_skill['created_at'];
+            $new_household_member_skills->updated_at = $household_member_skill['updated_at'];
+            $new_household_member_skills->created_by = $household_member_skill['created_by'];
+            $new_household_member_skills->updated_by = $household_member_skill['updated_by'];
+            $new_household_member_skills->region = $household_member_skill['region'];
+            $new_household_member_skills->region_id = $household_member_skill['region_id'];
+            $new_household_member_skills->province = $household_member_skill['province'];
+            $new_household_member_skills->province_id = $household_member_skill['province_id'];
+            $new_household_member_skills->city = $household_member_skill['city'];
+            $new_household_member_skills->city_id = $household_member_skill['city_id'];
+            $new_household_member_skills->barangay = $household_member_skill['barangay'];
+            $new_household_member_skills->barangay_id = $household_member_skill['barangay_id'];
+            $new_household_member_skills->purok = $household_member_skill['purok'];
+            $new_household_member_skills->purok_id = $household_member_skill['purok_id'];
+            $new_household_member_skills->status = 0;
+            $new_household_member_skills->house_no = $household_member_skill['house_no'];
+            $new_household_member_skills->household_no = $household_member_skill['household_no'];
+            $new_household_member_skills->household_member_no = $household_member_skill['household_member_no'];
+            $new_household_member_skills->fname = $household_member_skill['fname'];
+            $new_household_member_skills->mname = $household_member_skill['mname'];
+            $new_household_member_skills->lname = $household_member_skill['lname'];
+            $new_household_member_skills->sname = $household_member_skill['sname'];
 
+            $new_household_member_skills->ps_teaching = $household_member_skill['ps_teaching'];
+            $new_household_member_skills->ps_negotiating = $household_member_skill['ps_negotiating'];
+            $new_household_member_skills->ps_diverting = $household_member_skill['ps_diverting'];
+            $new_household_member_skills->ps_persuading = $household_member_skill['ps_persuading'];
+            $new_household_member_skills->ps_promoting = $household_member_skill['ps_promoting'];
+            $new_household_member_skills->ps_selling = $household_member_skill['ps_selling'];
+            $new_household_member_skills->ps_leading = $household_member_skill['ps_leading'];
+            $new_household_member_skills->ps_speaking = $household_member_skill['ps_speaking'];
+            $new_household_member_skills->ps_serving = $household_member_skill['ps_serving'];
+            $new_household_member_skills->ps_helping = $household_member_skill['ps_helping'];
+            $new_household_member_skills->ps_encouraging = $household_member_skill['ps_encouraging'];
+            $new_household_member_skills->ps_motivating = $household_member_skill['ps_motivating'];
+
+            $new_household_member_skills->ds_coordinating = $household_member_skill['ds_coordinating'];
+            $new_household_member_skills->ds_analyzing = $household_member_skill['ds_analyzing'];
+            $new_household_member_skills->ds_planning = $household_member_skill['ds_planning'];
+            $new_household_member_skills->ds_compiling = $household_member_skill['ds_compiling'];
+            $new_household_member_skills->ds_computing = $household_member_skill['ds_computing'];
+            $new_household_member_skills->ds_recording = $household_member_skill['ds_recording'];
+            $new_household_member_skills->ds_checking = $household_member_skill['ds_checking'];
+            $new_household_member_skills->ds_researching = $household_member_skill['ds_researching'];
+            $new_household_member_skills->ds_testing = $household_member_skill['ds_testing'];
+            $new_household_member_skills->ds_comparing = $household_member_skill['ds_comparing'];
+            $new_household_member_skills->ds_tabulating = $household_member_skill['ds_tabulating'];
+            $new_household_member_skills->ds_posting = $household_member_skill['ds_posting'];
+            $new_household_member_skills->ds_copying = $household_member_skill['ds_copying'];
+
+            $new_household_member_skills->ts_machine_work = $household_member_skill['ts_machine_work'];
+            $new_household_member_skills->ts_setting_up = $household_member_skill['ts_setting_up'];
+            $new_household_member_skills->ts_assembling = $household_member_skill['ts_assembling'];
+            $new_household_member_skills->ts_operating = $household_member_skill['ts_operating'];
+            $new_household_member_skills->ts_driving = $household_member_skill['ts_driving'];
+            $new_household_member_skills->ts_repairing = $household_member_skill['ts_repairing'];
+            $new_household_member_skills->ts_manipulating = $household_member_skill['ts_manipulating'];
+            $new_household_member_skills->ts_materials_handling = $household_member_skill['ts_materials_handling'];
+            $new_household_member_skills->ts_producing = $household_member_skill['ts_producing'];
+            $new_household_member_skills->ts_inspecting = $household_member_skill['ts_inspecting'];
+            $new_household_member_skills->ts_warehousing = $household_member_skill['ts_warehousing'];
+            $new_household_member_skills->ts_building = $household_member_skill['ts_building'];
+            $new_household_member_skills->ts_precision_working = $household_member_skill['ts_precision_working'];
+            $new_household_member_skills->ts_restoring = $household_member_skill['ts_restoring'];
+            $new_household_member_skills->ts_feeding = $household_member_skill['ts_feeding'];
+
+            $new_household_member_skills->is_implementing = $household_member_skill['is_implementing'];
+            $new_household_member_skills->is_synthesizing = $household_member_skill['is_synthesizing'];
+            $new_household_member_skills->is_interpreting = $household_member_skill['is_interpreting'];
+            $new_household_member_skills->is_instruction = $household_member_skill['is_instruction'];
+            $new_household_member_skills->is_speculating = $household_member_skill['is_speculating'];
+            $new_household_member_skills->is_anticipating = $household_member_skill['is_anticipating'];
+            $new_household_member_skills->is_inventing = $household_member_skill['is_inventing'];
+            $new_household_member_skills->is_discovering = $household_member_skill['is_discovering'];
+            $new_household_member_skills->is_predicting = $household_member_skill['is_predicting'];
+            $new_household_member_skills->is_theorizing = $household_member_skill['is_theorizing'];
+            $new_household_member_skills->is_innovating = $household_member_skill['is_innovating'];
+            $new_household_member_skills->is_expressing = $household_member_skill['is_expressing'];
+            $new_household_member_skills->is_organizing = $household_member_skill['is_organizing'];
+            $new_household_member_skills->transient_no = $household_member_skill['transient_no'];
+            $new_household_member_skills->save();
+        }
+        foreach ($household_member_vocational_experiences as $household_member_vocational_experience) {
+            array_push($household_member_vocational_experiences_array, $household_member_vocational_experience['id']);
+            $new_household_member_vocational_experiences = new HouseholdMemberVocationalExperience();
+            $new_household_member_vocational_experiences->created_at = $household_member_vocational_experience['created_at'];
+            $new_household_member_vocational_experiences->updated_at = $household_member_vocational_experience['updated_at'];
+            $new_household_member_vocational_experiences->created_by = $household_member_vocational_experience['created_by'];
+            $new_household_member_vocational_experiences->updated_by = $household_member_vocational_experience['updated_by'];
+            $new_household_member_vocational_experiences->region = $household_member_vocational_experience['region'];
+            $new_household_member_vocational_experiences->region_id = $household_member_vocational_experience['region_id'];
+            $new_household_member_vocational_experiences->province = $household_member_vocational_experience['province'];
+            $new_household_member_vocational_experiences->province_id = $household_member_vocational_experience['province_id'];
+            $new_household_member_vocational_experiences->city = $household_member_vocational_experience['city'];
+            $new_household_member_vocational_experiences->city_id = $household_member_vocational_experience['city_id'];
+            $new_household_member_vocational_experiences->barangay = $household_member_vocational_experience['barangay'];
+            $new_household_member_vocational_experiences->barangay_id = $household_member_vocational_experience['barangay_id'];
+            $new_household_member_vocational_experiences->purok = $household_member_vocational_experience['purok'];
+            $new_household_member_vocational_experiences->purok_id = $household_member_vocational_experience['purok_id'];
+            $new_household_member_vocational_experiences->status = 0;
+            $new_household_member_vocational_experiences->house_no = $household_member_vocational_experience['house_no'];
+            $new_household_member_vocational_experiences->household_no = $household_member_vocational_experience['household_no'];
+            $new_household_member_vocational_experiences->household_member_no = $household_member_vocational_experience['household_member_no'];
+            $new_household_member_vocational_experiences->fname = $household_member_vocational_experience['fname'];
+            $new_household_member_vocational_experiences->mname = $household_member_vocational_experience['mname'];
+            $new_household_member_vocational_experiences->lname = $household_member_vocational_experience['lname'];
+            $new_household_member_vocational_experiences->sname = $household_member_vocational_experience['sname'];
+
+            $new_household_member_vocational_experiences->name_of_training = $household_member_vocational_experience['name_of_training'];
+            $new_household_member_vocational_experiences->certificate_received = $household_member_vocational_experience['certificate_received'];
+            $new_household_member_vocational_experiences->skills_required = $household_member_vocational_experience['skills_required'];
+            $new_household_member_vocational_experiences->name_of_school = $household_member_vocational_experience['name_of_school'];
+            $new_household_member_vocational_experiences->period_of_training = $household_member_vocational_experience['period_of_training'];
+            $new_household_member_vocational_experiences->transient_no = $household_member_vocational_experience['transient_no'];
+            $new_household_member_vocational_experiences->save();
+        }
+        foreach ($household_member_work_experiences as $household_member_work_experience) {
+            array_push($household_member_work_experiences_array, $household_member_vocational_experience['id']);
+            $new_household_member_work_experiences = new HouseholdMemberWorkExperience();
+            $new_household_member_work_experiences->created_at = $household_member_work_experience['created_at'];
+            $new_household_member_work_experiences->updated_at = $household_member_work_experience['updated_at'];
+            $new_household_member_work_experiences->created_by = $household_member_work_experience['created_by'];
+            $new_household_member_work_experiences->updated_by = $household_member_work_experience['updated_by'];
+            $new_household_member_work_experiences->region = $household_member_work_experience['region'];
+            $new_household_member_work_experiences->region_id = $household_member_work_experience['region_id'];
+            $new_household_member_work_experiences->province = $household_member_work_experience['province'];
+            $new_household_member_work_experiences->province_id = $household_member_work_experience['province_id'];
+            $new_household_member_work_experiences->city = $household_member_work_experience['city'];
+            $new_household_member_work_experiences->city_id = $household_member_work_experience['city_id'];
+            $new_household_member_work_experiences->barangay = $household_member_work_experience['barangay'];
+            $new_household_member_work_experiences->barangay_id = $household_member_work_experience['barangay_id'];
+            $new_household_member_work_experiences->purok = $household_member_work_experience['purok'];
+            $new_household_member_work_experiences->purok_id = $household_member_work_experience['purok_id'];
+            $new_household_member_work_experiences->status = 0;
+            $new_household_member_work_experiences->house_no = $household_member_work_experience['house_no'];
+            $new_household_member_work_experiences->household_no = $household_member_work_experience['household_no'];
+            $new_household_member_work_experiences->household_member_no = $household_member_work_experience['household_member_no'];
+            $new_household_member_work_experiences->fname = $household_member_work_experience['fname'];
+            $new_household_member_work_experiences->mname = $household_member_work_experience['mname'];
+            $new_household_member_work_experiences->lname = $household_member_work_experience['lname'];
+            $new_household_member_work_experiences->sname = $household_member_work_experience['sname'];
+
+            $new_household_member_work_experiences->company = $household_member_work_experience['company'];
+            $new_household_member_work_experiences->company_address = $household_member_work_experience['company_address'];
+            $new_household_member_work_experiences->work_position = $household_member_work_experience['work_position'];
+            $new_household_member_work_experiences->work_description = $household_member_work_experience['work_description'];
+            $new_household_member_work_experiences->work_started = $household_member_work_experience['work_started'];
+            $new_household_member_work_experiences->work_ended = $household_member_work_experience['work_ended'];
+            $new_household_member_work_experiences->transient_no = $household_member_work_experience['transient_no'];
+            $new_household_member_work_experiences->save();
+        }
+        foreach ($houses as $house) {
+            array_push($houses_array, $house['id']);
+            $new_houses = new House();
+            $new_houses->created_at = $house['created_at'];
+            $new_houses->updated_at = $house['updated_at'];
+            $new_houses->created_by = $house['created_by'];
+            $new_houses->updated_by = $house['updated_by'];
+            $new_houses->region = $house['region'];
+            $new_houses->region_id = $house['region_id'];
+            $new_houses->province = $house['province'];
+            $new_houses->province_id = $house['province_id'];
+            $new_houses->city = $house['city'];
+            $new_houses->city_id = $house['city_id'];
+            $new_houses->barangay = $house['barangay'];
+            $new_houses->barangay_id = $house['barangay_id'];
+            $new_houses->purok = $house['purok'];
+            $new_houses->purok_id = $house['purok_id'];
+            $new_houses->status = 1;
+            $new_houses->house_no = $house['house_no'];
+            $new_houses->no_of_rooms = $house['no_of_rooms'];
+            $new_houses->bldg_types = $house['bldg_types'];
+            $new_houses->bldg_permit = $house['bldg_permit'];
+            $new_houses->toilet_types = $house['toilet_types'];
+            $new_houses->compartments = $house['compartments'];
+            $new_houses->bathroom_types = $house['bathroom_types'];
+            $new_houses->waste_disposal_methods = $house['waste_disposal_methods'];
+            $new_houses->kitchen_types = $house['kitchen_types'];
+            $new_houses->trans_types = $house['trans_types'];
+            $new_houses->construction_roof_types = $house['construction_roof_types'];
+            $new_houses->construction_wall_types = $house['construction_wall_types'];
+            $new_houses->construction_floor_types = $house['construction_floor_types'];
+            $new_houses->construction_communication_types = $house['construction_communication_types'];
+            $new_houses->lighting_fuels = $house['lighting_fuels'];
+            $new_houses->cooking_fuels = $house['cooking_fuels'];
+            $new_houses->water_sources = $house['water_sources'];
+            $new_houses->drinking_water_source_distance = $house['drinking_water_source_distance'];
+            $new_houses->nearest_water_source_distance = $house['nearest_water_source_distance'];
+            $new_houses->latitude = $house['latitude'];
+            $new_houses->longtitude = $house['longtitude'];
+            $new_houses->no_of_households = $house['no_of_households'];
+            $new_houses->no_of_household_members = $house['no_of_household_members'];
+            $new_houses->save();
+        }
         return response()->json(['households' => $households_array
                     , 'household_assets' => $household_assets_array
-                    , 'household_consumptions_array' => $household_consumptions_array
-                    , 'household_expenditures_array' => $household_expenditures_array
+                    , 'household_consumptions' => $household_consumptions_array
+                    , 'household_expenditures' => $household_expenditures_array
                     , 'household_members' => $household_members_array
                     , 'household_member_competence_certificates' => $household_member_competence_certificates_array
                     , 'household_member_educational_backgrounds' => $household_member_educational_backgrounds_array
                     , 'household_member_employment_status' => $household_member_employment_status_array
                     , 'household_member_health_statuses' => $household_member_health_statuses_array
+                    , 'household_member_licenses' => $household_member_licenses_array
+                    , 'household_member_medications' => $household_member_medications_array
+                    , 'household_member_prefered_works' => $household_member_prefered_works_array
+                    , 'household_member_skills' => $household_member_skills_array
+                    , 'household_member_vocational_experiences' => $household_member_vocational_experiences_array
+                    , 'household_member_work_experiences' => $household_member_work_experiences_array
+                    , 'houses' => $houses_array
                         ], 200);
     }
 
